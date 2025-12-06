@@ -9,7 +9,7 @@ local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 -- CONFIGURATION
 local BACKGROUND_COLOR = Color3.fromRGB(0, 0, 0)
 local ACCENT_COLOR = Color3.fromRGB(255, 255, 255)
-local TITLE_TEXT = "TAONG GOMA VERSION FIVE"
+local TITLE_TEXT = "GAWANG MAKI VERSION TWO"
 local FONT = Enum.Font.SourceSansBold
 
 -- MENU ITEMS
