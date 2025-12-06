@@ -1,0 +1,322 @@
+-- SERVICES
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- CONFIGURATION
+local BACKGROUND_COLOR = Color3.fromRGB(0, 0, 0)
+local ACCENT_COLOR = Color3.fromRGB(255, 255, 255)
+local TITLE_TEXT = "TAONG GOMA VERSION FIVE"
+local FONT = Enum.Font.SourceSansBold
+
+-- MENU ITEMS
+local MENU_ITEMS = {
+    "Cavite Roleplay",
+    "Urban Roleplay",
+    "The Billionaire City",
+}
+
+-- CREATE UI
+local function createScriptHubUI()
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "ScriptHubUI"
+    ScreenGui.Parent = PlayerGui
+    ScreenGui.ResetOnSpawn = false
+
+    -- MAIN FRAME
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Name = "MainFrame"
+    MainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.BackgroundColor3 = BACKGROUND_COLOR
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Parent = ScreenGui
+
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 8)
+    UICorner.Parent = MainFrame
+
+    -- TITLE BAR
+    local TitleBar = Instance.new("TextLabel")
+    TitleBar.Size = UDim2.new(1, 0, 0.1, 0)
+    TitleBar.Position = UDim2.new(0, 0, 0, 0)
+    TitleBar.BackgroundColor3 = BACKGROUND_COLOR
+    TitleBar.BorderSizePixel = 0
+    TitleBar.Font = FONT
+    TitleBar.Text = TITLE_TEXT
+    TitleBar.TextColor3 = ACCENT_COLOR
+    TitleBar.TextSize = 20
+    TitleBar.TextXAlignment = Enum.TextXAlignment.Left
+    TitleBar.Parent = MainFrame
+
+    local TitlePadding = Instance.new("UIPadding")
+    TitlePadding.PaddingLeft = UDim.new(0, 10)
+    TitlePadding.Parent = TitleBar
+
+    -- CENTER PANEL
+    local CenterPanel = Instance.new("Frame")
+    CenterPanel.Size = UDim2.new(0.9, 0, 0.85, 0)
+    CenterPanel.Position = UDim2.new(0.5, 0, 0.55, 0)
+    CenterPanel.AnchorPoint = Vector2.new(0.5, 0.5)
+    CenterPanel.BackgroundTransparency = 1
+    CenterPanel.Parent = MainFrame
+
+    -- LEFT PANEL
+    local LeftPanel = Instance.new("ScrollingFrame")
+    LeftPanel.Size = UDim2.new(0.45, 0, 1, 0)
+    LeftPanel.Position = UDim2.new(0, 0, 0, 0)
+    LeftPanel.BackgroundColor3 = BACKGROUND_COLOR
+    LeftPanel.BorderSizePixel = 0
+    LeftPanel.ScrollBarThickness = 6
+    LeftPanel.Parent = CenterPanel
+
+    local LeftListLayout = Instance.new("UIListLayout")
+    LeftListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    LeftListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+    LeftListLayout.Padding = UDim.new(0, 15)
+    LeftListLayout.Parent = LeftPanel
+
+    local LeftPadding = Instance.new("UIPadding")
+    LeftPadding.PaddingTop = UDim.new(0, 10)
+    LeftPadding.PaddingLeft = UDim.new(0, 0)
+    LeftPadding.Parent = LeftPanel
+
+    -- USER INFO
+    local UserInfo = Instance.new("Frame")
+    UserInfo.Size = UDim2.new(1, 0, 0.15, 0)
+    UserInfo.BackgroundTransparency = 1
+    UserInfo.Parent = LeftPanel
+
+    -- PROFILE IMAGE
+    local ProfileImage = Instance.new("ImageLabel")
+    ProfileImage.Size = UDim2.new(0, 50, 0, 50)
+    ProfileImage.Position = UDim2.new(0.02, 0, 0.1, 0)
+    ProfileImage.BackgroundTransparency = 1
+    ProfileImage.Parent = UserInfo
+
+    local content = Players:GetUserThumbnailAsync(
+        LocalPlayer.UserId,
+        Enum.ThumbnailType.HeadShot,
+        Enum.ThumbnailSize.Size420x420
+    )
+    ProfileImage.Image = content
+
+    -- USERNAME
+    local UsernameLabel = Instance.new("TextLabel")
+    UsernameLabel.Size = UDim2.new(0.7, 0, 0.4, 0)
+    UsernameLabel.Position = UDim2.new(0.25, 0, 0.2, 0)
+    UsernameLabel.BackgroundTransparency = 1
+    UsernameLabel.Font = FONT
+    UsernameLabel.Text = LocalPlayer.Name
+    UsernameLabel.TextColor3 = ACCENT_COLOR
+    UsernameLabel.TextSize = 18
+    UsernameLabel.TextXAlignment = Enum.TextXAlignment.Left
+    UsernameLabel.Parent = UserInfo
+
+    -- ONLINE STATUS
+    local StatusFrame = Instance.new("Frame")
+    StatusFrame.Size = UDim2.new(0, 12, 0, 12)
+    StatusFrame.Position = UDim2.new(0.25, 0, 0.7, 0)
+    StatusFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+    StatusFrame.BorderSizePixel = 0
+    StatusFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    StatusFrame.Parent = UserInfo
+
+    local StatusUICorner = Instance.new("UICorner")
+    StatusUICorner.CornerRadius = UDim.new(1, 0)
+    StatusUICorner.Parent = StatusFrame
+
+    local StatusLabel = Instance.new("TextLabel")
+    StatusLabel.Size = UDim2.new(0.4, 0, 0.3, 0)
+    StatusLabel.Position = UDim2.new(0.32, 0, 0.7, 0)
+    StatusLabel.BackgroundTransparency = 1
+    StatusLabel.Font = Enum.Font.SourceSans
+    StatusLabel.Text = "Online"
+    StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+    StatusLabel.TextSize = 14
+    StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
+    StatusLabel.Parent = UserInfo
+
+    -- RIGHT PANEL
+    local RightPanel = Instance.new("ScrollingFrame")
+    RightPanel.Size = UDim2.new(0.45, 0, 1, 0)
+    RightPanel.Position = UDim2.new(0.55, 0, 0, 0)
+    RightPanel.BackgroundColor3 = BACKGROUND_COLOR
+    RightPanel.BorderSizePixel = 0
+    RightPanel.ScrollBarThickness = 6
+    RightPanel.Parent = CenterPanel
+
+    local RightListLayout = Instance.new("UIListLayout")
+    RightListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    RightListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+    RightListLayout.Padding = UDim.new(0, 15)
+    RightListLayout.Parent = RightPanel
+
+    local RightPadding = Instance.new("UIPadding")
+    RightPadding.PaddingTop = UDim.new(0, 10)
+    RightPadding.PaddingLeft = UDim.new(0, 0)
+    RightPadding.Parent = RightPanel
+
+    -- DEFAULT PLACEHOLDER TEXT
+    local PlaceholderLabel = Instance.new("TextLabel")
+    PlaceholderLabel.Size = UDim2.new(1, -20, 0, 60)
+    PlaceholderLabel.Position = UDim2.new(0, 10, 0, 50)
+    PlaceholderLabel.BackgroundTransparency = 1
+    PlaceholderLabel.Font = FONT
+    PlaceholderLabel.TextColor3 = ACCENT_COLOR
+    PlaceholderLabel.TextSize = 16
+    PlaceholderLabel.Text = "SUGGEST SYUDAD PARA MA ADD\nPRESS M TO HIDE/SHOW THE GUI\nMAKI ON TOP"
+    PlaceholderLabel.TextWrapped = true
+    PlaceholderLabel.TextYAlignment = Enum.TextYAlignment.Top
+    PlaceholderLabel.Parent = RightPanel
+
+    -- BUTTON CREATION FUNCTION
+    local function CreateButton(name, callback)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(1, -20, 0, 30)
+        btn.BackgroundColor3 = BACKGROUND_COLOR
+        btn.BorderSizePixel = 0
+        btn.Font = FONT
+        btn.Text = name
+        btn.TextColor3 = ACCENT_COLOR
+        btn.TextSize = 16
+        btn.TextXAlignment = Enum.TextXAlignment.Center
+        btn.Parent = RightPanel
+        btn.MouseButton1Click:Connect(callback)
+    end
+
+    -- POPULATE LEFT MENU ITEMS
+    for i, itemText in ipairs(MENU_ITEMS) do
+        local MenuItem = Instance.new("TextButton")
+        MenuItem.Size = UDim2.new(1, -20, 0, 30)
+        MenuItem.BackgroundColor3 = BACKGROUND_COLOR
+        MenuItem.BorderSizePixel = 0
+        MenuItem.Font = FONT
+        MenuItem.Text = itemText
+        MenuItem.TextColor3 = ACCENT_COLOR
+        MenuItem.TextSize = 16
+        MenuItem.TextXAlignment = Enum.TextXAlignment.Center
+        MenuItem.Parent = LeftPanel
+
+        MenuItem.MouseButton1Click:Connect(function()
+            -- Clear Right Panel buttons
+            for _, child in ipairs(RightPanel:GetChildren()) do
+                if child:IsA("TextButton") then child:Destroy() end
+            end
+            PlaceholderLabel.Visible = false
+
+            -- CAVITE
+            if itemText == "Cavite Roleplay" then
+                local function CreateCaviteButton(name, itemName)
+                    CreateButton(name, function()
+                        local args = {
+                            [1] = -1000000,
+                            [2] = itemName
+                        }
+                        ReplicatedStorage:WaitForChild("BM_Storage"):WaitForChild("Remotes"):WaitForChild("Buy"):FireServer(unpack(args))
+                    end)
+                end
+                CreateCaviteButton("Heavy Helmet", "Heavy Helmet")
+                CreateCaviteButton("Heavy Vest", "Heavy Vest")
+                CreateCaviteButton("SP", "Silenced Pistol")
+                CreateCaviteButton("Knife", "Tactical Knife")
+
+            -- URBAN
+            elseif itemText == "Urban Roleplay" then
+                CreateButton("SP", function()
+                    local args = {"Suppressed Pistols", 0, "RACCMETHOD"}
+                    ReplicatedStorage:WaitForChild("BiliToolEvent"):FireServer(unpack(args))
+                end)
+                CreateButton("AmmoBox", function()
+                    local args = {"AmmoBox", 0, "RACCMETHOD"}
+                    ReplicatedStorage:WaitForChild("BiliToolEvent"):FireServer(unpack(args))
+                end)
+                CreateButton("Sandwich", function()
+                    local args = {"Sandwich", 0, "RACCMETHOD"}
+                    ReplicatedStorage:WaitForChild("UwUCafeFolder"):WaitForChild("BuyTool"):FireServer(unpack(args))
+                end)
+                CreateButton("Matcha Latte", function()
+                    local args = {"Matcha Latte", 0, "RACCMETHOD"}
+                    ReplicatedStorage:WaitForChild("UwUCafeFolder"):WaitForChild("BuyTool"):FireServer(unpack(args))
+                end)
+
+            -- TBC
+            elseif itemText == "The Billionaire City" then
+                local function CreateTBCButton(name, callback, tag)
+                    CreateButton(name .. " " .. (tag or "(DETECTABLE)"), callback)
+                end
+
+                CreateTBCButton("AYUDA SPAWN UNLI USE", function()
+                    for _, tool in pairs(ReplicatedStorage:GetChildren()) do
+                        if tool:IsA("Tool") then
+                            local clone = tool:Clone()
+                            clone.Parent = LocalPlayer.Backpack
+                        end
+                    end
+                end, "(SAFE)")
+
+                local tbcItems = {"Combo 3","Pill","Oxy","Normal Pistol","Pistolbody","SharkFang","Lockpick","Glass","Bottle","Knife","Blueprint"}
+                for _, itemName in ipairs(tbcItems) do
+                    CreateTBCButton(itemName, function()
+                        local args = {itemName, 1, "RACCMETHOD"}
+                        ReplicatedStorage:WaitForChild("BuyTbcItemEvent"):FireServer(unpack(args))
+                    end)
+                end
+            end
+        end)
+    end
+
+    return MainFrame, TitleBar
+end
+
+-- CREATE UI
+local MainFrame, TitleBar = createScriptHubUI()
+
+-- DRAG LOGIC
+local isDragging = false
+local dragStartPos = Vector2.new(0, 0)
+local frameStartPos = UDim2.new(0, 0, 0, 0)
+
+local function moveFrame(input)
+    if isDragging then
+        local delta = input.Position - dragStartPos
+        MainFrame.Position = UDim2.new(0, frameStartPos.X.Offset + delta.X, 0, frameStartPos.Y.Offset + delta.Y)
+    end
+end
+
+TitleBar.InputBegan:Connect(function(input, gameProcessedEvent)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if not gameProcessedEvent then
+            isDragging = true
+            dragStartPos = input.Position
+            frameStartPos = MainFrame.Position
+            MainFrame.AnchorPoint = Vector2.new(0, 0)
+        end
+    end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        isDragging = false
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        moveFrame(input)
+    end
+end)
+
+-- TOGGLE GUI WITH M
+local guiVisible = true
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    if gameProcessedEvent then return end
+    if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.M then
+        guiVisible = not guiVisible
+        MainFrame.Visible = guiVisible
+    end
+end)
