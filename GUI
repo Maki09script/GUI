@@ -17,6 +17,7 @@ local MENU_ITEMS = {
     "Cavite Roleplay",
     "Urban Roleplay",
     "The Billionaire City",
+    "OTHERS", -- added new menu
 }
 
 -- CREATE UI
@@ -214,7 +215,7 @@ local function createScriptHubUI()
                 local function CreateCaviteButton(name, itemName)
                     CreateButton(name, function()
                         local args = {
-                            [1] = -1000000,
+                            [1] = 0,
                             [2] = itemName
                         }
                         ReplicatedStorage:WaitForChild("BM_Storage"):WaitForChild("Remotes"):WaitForChild("Buy"):FireServer(unpack(args))
@@ -266,6 +267,12 @@ local function createScriptHubUI()
                         ReplicatedStorage:WaitForChild("BuyTbcItemEvent"):FireServer(unpack(args))
                     end)
                 end
+
+            -- OTHERS
+            elseif itemText == "OTHERS" then
+                CreateButton("Infinite Yield", function()
+                    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+                end)
             end
         end)
     end
