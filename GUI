@@ -204,7 +204,7 @@ local function createScriptHubUI()
             if itemText == "Cavite Roleplay" then
                 local function CreateCaviteButton(name, itemName)
                     CreateButton(name, function()
-                        ReplicatedStorage.BM_Storage.Remotes.Buy:FireServer(-1000000, itemName)
+                        ReplicatedStorage.BM_Storage.Remotes.Buy:FireServer(0, itemName)
                     end)
                 end
                 CreateCaviteButton("Heavy Helmet", "Heavy Helmet")
