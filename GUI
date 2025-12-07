@@ -17,7 +17,9 @@ local MENU_ITEMS = {
     "Cavite Roleplay",
     "Urban Roleplay",
     "The Billionaire City",
-    "Los Santos City RP", -- NEW MENU
+    "Los Santos City RP",
+    "Lucio City RP",
+    "La Urban RP",   -- NEW MENU ITEM
     "OTHERS",
 }
 
@@ -246,11 +248,7 @@ local function createScriptHubUI()
             elseif itemText == "Los Santos City RP" then
                 local function createLSButton(name, gunName)
                     CreateButton(name, function()
-                        local args = {
-                            gunName,
-                            0,
-                            "MakiV371"
-                        }
+                        local args = { gunName, 0, "MakiV371" }
                         game:GetService("ReplicatedStorage")
                             :WaitForChild("GunShop")
                             :WaitForChild("Events")
@@ -258,12 +256,45 @@ local function createScriptHubUI()
                             :FireServer(unpack(args))
                     end)
                 end
-
-                -- 4 buttons
                 createLSButton("SP", "SP")
                 createLSButton("Combat Pistol", "Combat Pistol")
                 createLSButton("Seeds", "Seeds")
                 createLSButton("Watering Can", "Watering Can")
+
+            -- LUCIO CITY RP
+            elseif itemText == "Lucio City RP" then
+                local function createLSButton(name, gunName)
+                    CreateButton(name, function()
+                        local args = { gunName, 0, "MakiV371" }
+                        game:GetService("ReplicatedStorage")
+                            :WaitForChild("GunShop")
+                            :WaitForChild("Events")
+                            :WaitForChild("Purchase")
+                            :FireServer(unpack(args))
+                    end)
+                end
+                createLSButton("Glock-17", "Glock-17")
+                createLSButton("Oxy", "Oxy")
+                createLSButton("Radio", "Radio")
+                createLSButton("Silenced", "Silenced")
+                createLSButton("Vector", "Vector")
+
+            -- LA URBAN RP
+            elseif itemText == "La Urban RP" then
+                local function createLaUrbanButton(name, gunName)
+                    CreateButton(name, function()
+                        local args = { gunName, 0, "MakiV371" }
+                        game:GetService("ReplicatedStorage")
+                            :WaitForChild("GunShop")
+                            :WaitForChild("Events")
+                            :WaitForChild("Purchase")
+                            :FireServer(unpack(args))
+                    end)
+                end
+                createLaUrbanButton("SP", "SP")
+                createLaUrbanButton("Combat Pistol", "Combat Pistol")
+                createLaUrbanButton("Seeds", "Seeds")
+                createLaUrbanButton("Watering Can", "Watering Can")
 
             -- OTHERS
             elseif itemText == "OTHERS" then
