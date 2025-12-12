@@ -226,6 +226,9 @@ local function createScriptHubUI()
                 CreateButton("Matcha Latte", function()
                     ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Matcha Latte", 0, "RACCMETHOD")
                 end)
+                CreateButton("Matcha Latte", function()
+                    ReplicatedStorage.EMSFolder.PabiliTool:FireServer("Oxy", 0, "RACCMETHOD")
+                end)
 
             -- THE BILLIONAIRE CITY
             elseif itemText == "The Billionaire City" then
