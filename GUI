@@ -302,7 +302,7 @@ local function createScriptHubUI()
 
             -- Maharlika RP
             elseif itemText == "Maharlika RP" then
-                local function createLaUrbanButton(name, gunName)
+                local function createMaharlikaRPButton(name, gunName)
                     CreateButton(name, function()
                         local args = { gunName, 0, "MakiV371" }
                         game:GetService("ReplicatedStorage")
@@ -312,23 +312,9 @@ local function createScriptHubUI()
                             :FireServer(unpack(args))
                     end)
                 end
-                createMaharlikaRpButton("Bat", "Bat")
-                createMaharlikaRpButton("Silenced Pistol", "Silenced Pistol")
-                createMaharlikaRpButton("Glock-17", "Glock-17")
-
-            -- Maharlika RP
-            elseif itemText == "Maharlika RP" then
-                local function createLaUrbanButton(name, gunName)
-                    CreateButton(name, function()
-                        local args = { gunName, 0, "MakiV371" }
-                        game:GetService("ReplicatedStorage")
-                            :WaitForChild("GunShop")
-                            :WaitForChild("Events")
-                            :WaitForChild("Purchase")
-                            :FireServer(unpack(args))
-                    end)
-                end
-                createMaharlikaRpButton("Get 100k", "Bat")
+                createMaharlikaRPButton("Bat", "Bat")
+                createMaharlikaRPButton("Silenced Pistol", "Silenced Pistol")
+                createMaharlikaRPButton("Glock-17", "Glock-17")
                
             -- OTHERS
             elseif itemText == "OTHERS" then
