@@ -19,9 +19,9 @@ local MENU_ITEMS = {
     "The Billionaire City",
     "Los Santos City RP",
     "Lucio City RP",
-    "La Urban RP", -- NEW MENU ITEM
+    "La Urban RP",
     "Maharlika RP",
-    "Silangan Metro City",
+    "Silangan Metro City", -- ✅ ADDED
     "OTHERS",
 }
 
@@ -34,7 +34,6 @@ local function createScriptHubUI()
 
     -- MAIN FRAME
     local MainFrame = Instance.new("Frame")
-    MainFrame.Name = "MainFrame"
     MainFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
     MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
     MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -42,9 +41,7 @@ local function createScriptHubUI()
     MainFrame.BorderSizePixel = 0
     MainFrame.Parent = ScreenGui
 
-    local UICorner = Instance.new("UICorner")
-    UICorner.CornerRadius = UDim.new(0, 8)
-    UICorner.Parent = MainFrame
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 8)
 
     -- TITLE BAR
     local TitleBar = Instance.new("TextLabel")
@@ -58,9 +55,8 @@ local function createScriptHubUI()
     TitleBar.TextXAlignment = Enum.TextXAlignment.Left
     TitleBar.Parent = MainFrame
 
-    local TitlePadding = Instance.new("UIPadding")
+    local TitlePadding = Instance.new("UIPadding", TitleBar)
     TitlePadding.PaddingLeft = UDim.new(0, 10)
-    TitlePadding.Parent = TitleBar
 
     -- CENTER PANEL
     local CenterPanel = Instance.new("Frame")
@@ -73,91 +69,26 @@ local function createScriptHubUI()
     -- LEFT PANEL
     local LeftPanel = Instance.new("ScrollingFrame")
     LeftPanel.Size = UDim2.new(0.45, 0, 1, 0)
+    LeftPanel.ScrollBarThickness = 6
     LeftPanel.BackgroundColor3 = BACKGROUND_COLOR
     LeftPanel.BorderSizePixel = 0
-    LeftPanel.ScrollBarThickness = 6
     LeftPanel.Parent = CenterPanel
 
-    local LeftListLayout = Instance.new("UIListLayout")
-    LeftListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-    LeftListLayout.Padding = UDim.new(0, 15)
-    LeftListLayout.Parent = LeftPanel
-
-    local LeftPadding = Instance.new("UIPadding")
-    LeftPadding.PaddingTop = UDim.new(0, 10)
-    LeftPadding.Parent = LeftPanel
-
-    -- USER INFO
-    local UserInfo = Instance.new("Frame")
-    UserInfo.Size = UDim2.new(1, 0, 0.15, 0)
-    UserInfo.BackgroundTransparency = 1
-    UserInfo.Parent = LeftPanel
-
-    -- PROFILE IMAGE
-    local ProfileImage = Instance.new("ImageLabel")
-    ProfileImage.Size = UDim2.new(0, 50, 0, 50)
-    ProfileImage.Position = UDim2.new(0.02, 0, 0.1, 0)
-    ProfileImage.BackgroundTransparency = 1
-    ProfileImage.Parent = UserInfo
-
-    local content = Players:GetUserThumbnailAsync(
-        LocalPlayer.UserId,
-        Enum.ThumbnailType.HeadShot,
-        Enum.ThumbnailSize.Size420x420
-    )
-    ProfileImage.Image = content
-
-    -- USERNAME
-    local UsernameLabel = Instance.new("TextLabel")
-    UsernameLabel.Size = UDim2.new(0.7, 0, 0.4, 0)
-    UsernameLabel.Position = UDim2.new(0.25, 0, 0.2, 0)
-    UsernameLabel.BackgroundTransparency = 1
-    UsernameLabel.Font = FONT
-    UsernameLabel.Text = LocalPlayer.Name
-    UsernameLabel.TextColor3 = ACCENT_COLOR
-    UsernameLabel.TextSize = 18
-    UsernameLabel.TextXAlignment = Enum.TextXAlignment.Left
-    UsernameLabel.Parent = UserInfo
-
-    -- ONLINE STATUS
-    local StatusFrame = Instance.new("Frame")
-    StatusFrame.Size = UDim2.new(0, 12, 0, 12)
-    StatusFrame.Position = UDim2.new(0.25, 0, 0.7, 0)
-    StatusFrame.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
-    StatusFrame.BorderSizePixel = 0
-    StatusFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-    StatusFrame.Parent = UserInfo
-
-    local StatusUICorner = Instance.new("UICorner")
-    StatusUICorner.CornerRadius = UDim.new(1, 0)
-    StatusUICorner.Parent = StatusFrame
-
-    local StatusLabel = Instance.new("TextLabel")
-    StatusLabel.Size = UDim2.new(0.4, 0, 0.3, 0)
-    StatusLabel.Position = UDim2.new(0.32, 0, 0.7, 0)
-    StatusLabel.BackgroundTransparency = 1
-    StatusLabel.Font = Enum.Font.SourceSans
-    StatusLabel.Text = "Online"
-    StatusLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
-    StatusLabel.TextSize = 14
-    StatusLabel.TextXAlignment = Enum.TextXAlignment.Left
-    StatusLabel.Parent = UserInfo
+    Instance.new("UIListLayout", LeftPanel).Padding = UDim.new(0, 15)
+    Instance.new("UIPadding", LeftPanel).PaddingTop = UDim.new(0, 10)
 
     -- RIGHT PANEL
     local RightPanel = Instance.new("ScrollingFrame")
     RightPanel.Size = UDim2.new(0.45, 0, 1, 0)
     RightPanel.Position = UDim2.new(0.55, 0)
+    RightPanel.ScrollBarThickness = 6
     RightPanel.BackgroundColor3 = BACKGROUND_COLOR
     RightPanel.BorderSizePixel = 0
-    RightPanel.ScrollBarThickness = 6
     RightPanel.Parent = CenterPanel
 
-    local RightListLayout = Instance.new("UIListLayout")
-    RightListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-    RightListLayout.Padding = UDim.new(0, 15)
-    RightListLayout.Parent = RightPanel
+    Instance.new("UIListLayout", RightPanel).Padding = UDim.new(0, 15)
 
-    -- DEFAULT PLACEHOLDER TEXT
+    -- PLACEHOLDER
     local PlaceholderLabel = Instance.new("TextLabel")
     PlaceholderLabel.Size = UDim2.new(1, -20, 0, 60)
     PlaceholderLabel.Position = UDim2.new(0, 10, 0, 50)
@@ -165,11 +96,11 @@ local function createScriptHubUI()
     PlaceholderLabel.Font = FONT
     PlaceholderLabel.TextColor3 = ACCENT_COLOR
     PlaceholderLabel.TextSize = 16
-    PlaceholderLabel.Text = "SUGGEST SYUDAD PARA MA ADD\nPRESS M TO HIDE/SHOW THE GUI\nMAKI ON TOP"
     PlaceholderLabel.TextWrapped = true
+    PlaceholderLabel.Text = "SELECT A CITY\nPRESS M TO TOGGLE\nMAKI ON TOP"
     PlaceholderLabel.Parent = RightPanel
 
-    -- BUTTON CREATION FUNCTION
+    -- BUTTON FUNCTION
     local function CreateButton(name, callback)
         local btn = Instance.new("TextButton")
         btn.Size = UDim2.new(1, -20, 0, 30)
@@ -183,7 +114,7 @@ local function createScriptHubUI()
         btn.MouseButton1Click:Connect(callback)
     end
 
-    -- POPULATE LEFT MENU
+    -- LEFT MENU
     for _, itemText in ipairs(MENU_ITEMS) do
         local MenuItem = Instance.new("TextButton")
         MenuItem.Size = UDim2.new(1, -20, 0, 30)
@@ -196,139 +127,31 @@ local function createScriptHubUI()
         MenuItem.Parent = LeftPanel
 
         MenuItem.MouseButton1Click:Connect(function()
-            -- Clear old right-panel buttons
             for _, child in ipairs(RightPanel:GetChildren()) do
                 if child:IsA("TextButton") then child:Destroy() end
             end
             PlaceholderLabel.Visible = false
 
-            -- CAVITE
-            if itemText == "Cavite Roleplay" then
-                local function CreateCaviteButton(name, itemName)
-                    CreateButton(name, function()
-                        ReplicatedStorage.BM_Storage.Remotes.Buy:FireServer(0, itemName)
-                    end)
-                end
-                CreateCaviteButton("Heavy Helmet", "Heavy Helmet")
-                CreateCaviteButton("Heavy Vest", "Heavy Vest")
-                CreateCaviteButton("SP", "Silenced Pistol")
-                CreateCaviteButton("Knife", "Tactical Knife")
-
-            -- URBAN
-            elseif itemText == "Urban Roleplay" then
-                CreateButton("SP", function()
-                    ReplicatedStorage.BiliToolEvent:FireServer("Suppressed Pistols", 0, "RACCMETHOD")
-                end)
-                CreateButton("AmmoBox", function()
-                    ReplicatedStorage.BiliToolEvent:FireServer("AmmoBox", 0, "RACCMETHOD")
-                end)
-                CreateButton("Sandwich", function()
-                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Sandwich", 0, "RACCMETHOD")
-                end)
-                CreateButton("Matcha Latte", function()
-                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Matcha Latte", 0, "RACCMETHOD")
-                end)
-                CreateButton("Oxy", function()
-                    ReplicatedStorage.EMSFolder.PabiliTool:FireServer("Oxy", 0, "RACCMETHOD")
-                end)
-
-            -- THE BILLIONAIRE CITY
-            elseif itemText == "The Billionaire City" then
-                CreateButton("UNLI AYUDA", function()
-                    for _, tool in pairs(ReplicatedStorage:GetChildren()) do
-                        if tool:IsA("Tool") then
-                            tool:Clone().Parent = LocalPlayer.Backpack
-                        end
-                    end
-                end)
-
-                local tbcItems = {"Combo 3","Pill","Oxy","Normal Pistol","Pistolbody","SharkFang","Lockpick","Glass","Bottle","Knife","Blueprint"}
-                for _, itemName in ipairs(tbcItems) do
-                    CreateButton(itemName, function()
-                        ReplicatedStorage.BuyTbcItemEvent:FireServer(itemName, 1, "RACCMETHOD")
-                    end)
-                end
-
-            -- LOS SANTOS CITY RP
-            elseif itemText == "Los Santos City RP" then
-                local function createLSButton(name, gunName)
-                    CreateButton(name, function()
-                        local args = { gunName, 0, "MakiV371" }
-                        game:GetService("ReplicatedStorage")
-                            :WaitForChild("GunShop")
-                            :WaitForChild("Events")
-                            :WaitForChild("Purchase")
-                            :FireServer(unpack(args))
-                    end)
-                end
-                createLSButton("SP", "SP")
-                createLSButton("Combat Pistol", "Combat Pistol")
-                createLSButton("Seeds", "Seeds")
-                createLSButton("Watering Can", "Watering Can")
-
-            -- LUCIO CITY RP
-            elseif itemText == "Lucio City RP" then
-                local function createLSButton(name, gunName)
-                    CreateButton(name, function()
-                        local args = { gunName, 0, "MakiV371" }
-                        game:GetService("ReplicatedStorage")
-                            :WaitForChild("GunShop")
-                            :WaitForChild("Events")
-                            :WaitForChild("Purchase")
-                            :FireServer(unpack(args))
-                    end)
-                end
-                createLSButton("Glock-17", "Glock-17")
-                createLSButton("Oxy", "Oxy")
-                createLSButton("Radio", "Radio")
-                createLSButton("Silenced", "Silenced")
-                createLSButton("Vector", "Vector")
-
-            -- LA URBAN RP
-            elseif itemText == "La Urban RP" then
-                local function createLaUrbanButton(name, gunName)
-                    CreateButton(name, function()
-                        local args = { gunName, 0, "MakiV371" }
-                        game:GetService("ReplicatedStorage")
-                            :WaitForChild("GunShop")
-                            :WaitForChild("Events")
-                            :WaitForChild("Purchase")
-                            :FireServer(unpack(args))
-                    end)
-                end
-                createLaUrbanButton("SP", "SP")
-                createLaUrbanButton("Combat Pistol", "Combat Pistol")
-                createLaUrbanButton("Seeds", "Seeds")
-                createLaUrbanButton("Watering Can", "Watering Can")
-
-            -- Maharlika RP
-            elseif itemText == "Maharlika RP" then
-                local function createMaharlikaRPButton(name, gunName)
-                    CreateButton(name, function()
-                        local args = { gunName, 0, "MakiV371" }
-                        game:GetService("ReplicatedStorage")
-                            :WaitForChild("GunShop")
-                            :WaitForChild("Events")
-                            :WaitForChild("Purchase")
-                            :FireServer(unpack(args))
-                    end)
-                end
-                createMaharlikaRPButton("Bat", "Bat")
-                createMaharlikaRPButton("Silenced Pistol", "Silenced Pistol")
-                createMaharlikaRPButton("Glock-17", "Glock-17")
-
-            -- Silangan
-            elseif itemText == "Silangan Metro City" then
+            -- SILANGAN METRO CITY ✅
+            if itemText == "Silangan Metro City" then
                 CreateButton("Pistol", function()
-                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Pistol", 0, "RACCMETHOD")
+                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer(
+                        "Pistol", 0, "RACCMETHOD"
+                    )
                 end)
+
                 CreateButton("Silenced Pistol", function()
-                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Silenced Pistol", 0, "RACCMETHOD")
-               
+                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer(
+                        "Silenced Pistol", 0, "RACCMETHOD"
+                    )
+                end)
+
             -- OTHERS
             elseif itemText == "OTHERS" then
                 CreateButton("Infinite Yield", function()
-                    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+                    loadstring(game:HttpGet(
+                        "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"
+                    ))()
                 end)
             end
         end)
@@ -337,44 +160,44 @@ local function createScriptHubUI()
     return MainFrame, TitleBar
 end
 
--- CREATE UI
+-- INIT UI
 local MainFrame, TitleBar = createScriptHubUI()
 
--- DRAG LOGIC
-local isDragging = false
-local dragStartPos = Vector2.new()
-local frameStartPos
+-- DRAG
+local dragging = false
+local dragStart, startPos
 
-TitleBar.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        isDragging = true
-        dragStartPos = input.Position
-        frameStartPos = MainFrame.Position
-        MainFrame.AnchorPoint = Vector2.new(0, 0)
+TitleBar.InputBegan:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = i.Position
+        startPos = MainFrame.Position
+        MainFrame.AnchorPoint = Vector2.new(0,0)
     end
 end)
 
-UserInputService.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        isDragging = false
+UserInputService.InputEnded:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
     end
 end)
 
-UserInputService.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement then
-        if isDragging then
-            local delta = input.Position - dragStartPos
-            MainFrame.Position = UDim2.new(0, frameStartPos.X.Offset + delta.X, 0, frameStartPos.Y.Offset + delta.Y)
-        end
+UserInputService.InputChanged:Connect(function(i)
+    if dragging and i.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = i.Position - dragStart
+        MainFrame.Position = UDim2.new(
+            0, startPos.X.Offset + delta.X,
+            0, startPos.Y.Offset + delta.Y
+        )
     end
 end)
 
--- TOGGLE GUI WITH M
-local guiVisible = true
-UserInputService.InputBegan:Connect(function(input, gp)
+-- TOGGLE M
+local visible = true
+UserInputService.InputBegan:Connect(function(i, gp)
     if gp then return end
-    if input.KeyCode == Enum.KeyCode.M then
-        guiVisible = not guiVisible
-        MainFrame.Visible = guiVisible
+    if i.KeyCode == Enum.KeyCode.M then
+        visible = not visible
+        MainFrame.Visible = visible
     end
 end)
