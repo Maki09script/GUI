@@ -316,8 +316,6 @@ local function createScriptHubUI()
             elseif itemText == "OTHERS" then
                 CreateButton("Infinite Yield", function()
                     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-                CreateButton("ADMIN PANEL (OTHER SYUDAD)", function()
-                    panel=game:GetService("Players").LocalPlayer.PlayerGui.ExtraUI.AdminPanel;panel.Transparency=0.7;panel.Visible=true
                 end)
             end
         end)
