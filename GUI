@@ -21,6 +21,7 @@ local MENU_ITEMS = {
     "Lucio City RP",
     "La Urban RP", -- NEW MENU ITEM
     "Maharlika RP",
+    "Silangan Metro City",
     "OTHERS",
 }
 
@@ -315,6 +316,14 @@ local function createScriptHubUI()
                 createMaharlikaRPButton("Bat", "Bat")
                 createMaharlikaRPButton("Silenced Pistol", "Silenced Pistol")
                 createMaharlikaRPButton("Glock-17", "Glock-17")
+
+            -- Silangan
+            elseif itemText == "Silangan Metro City" then
+                CreateButton("Pistol", function()
+                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Pistol", 0, "RACCMETHOD")
+                end)
+                CreateButton("Silenced Pistol", function()
+                    ReplicatedStorage.UwUCafeFolder.BuyTool:FireServer("Silenced Pistol", 0, "RACCMETHOD")
                
             -- OTHERS
             elseif itemText == "OTHERS" then
