@@ -314,8 +314,14 @@ local function createScriptHubUI()
 
             -- OTHERS
             elseif itemText == "OTHERS" then
+                -- Infinite Yield
                 CreateButton("Infinite Yield", function()
                     loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+                end)
+
+                -- ESPxHEADRESIZE
+                CreateButton("(Headresize E, on T, off) (Esp P on/off)", function()
+                    loadstring(game:HttpGet('https://raw.githubusercontent.com/Maki09script/espxheadsize/refs/heads/main/espxheadsizes.lua'))()
                 end)
             end
         end)
